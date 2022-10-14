@@ -1,10 +1,14 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
+import express, { Application } from 'express';
+import routes from './routes/routes';
+import { errorHandler } from './middleware/errorMiddleware';
 
 const app: Application = express();
 const port = process.env.PORT || 5000;
 
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-    res.status(200).send({ data: 'Hello Route' });
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+routes(app);
+app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));
