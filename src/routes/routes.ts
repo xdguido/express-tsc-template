@@ -25,4 +25,6 @@ export default function routes(app: Application) {
         const num: any = null;
         console.log(num.length);
     });
+
+    app.get('/get-user', (req: Request, res: Response, next: NextFunction) => {});
 }
